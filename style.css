@@ -259,6 +259,7 @@ button { font-family: inherit; color: inherit; }
 .news {
   display: grid;
   gap: 40px;
+  margin-top: 24px;
 }
 
 .news-badge {
