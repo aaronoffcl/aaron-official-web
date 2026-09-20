@@ -43,12 +43,12 @@ TikTok（`@aaron.nottiktoker`、フォロワー約4,000〜1,000人規模のア�
    - 他のリンクより明確に大きく・上位に配置（例: 幅いっぱいの大きめボタン、赤系アクセント）
    - タップ後は新しいタブ/アプリでYouTubeチャンネルを開く
 3. **サブリンク行**
-   - Instagram、X(Twitter) など。アイコン+ラベルのボタンをYouTubeボタンより小さく横並び/縦積みで配置
-   - リンク一覧はJSの配列で管理し、後からTikTok本アカウント等を追加しやすくする
-4. **動画セクション（最新/人気動画）**
-   - YouTubeのサムネイル画像を数本（3〜6本目安）カード形式で並べる
+   - Instagram のみ(今回はYouTube・Instagramの2つで確定。他SNSは後から`LINKS`配列に追加するだけで拡張可能)
+   - アイコン+ラベルのボタンをYouTubeボタンより小さく配置
+4. **動画セクション（最新動画・自動取得）**
+   - YouTube Data API v3 でチャンネルの最新動画を自動取得し、サムネイルカード（3〜6本）で表示する
    - 各カードはサムネイル＋タイトル＋再生ボタンのオーバーレイ。タップでYouTube側の該当動画へ遷移（軽量なサムネイルリンク方式を採用し、埋め込みiframeによるページの重さ・離脱防止のジレンマを避ける。目的が「YouTubeへの誘導」であるため、この方式の方が目的に合致する）
-   - 動画データもJSの配列（動画ID・タイトル・サムネイルURL）で管理し、更新を容易にする
+   - API取得に失敗した場合（通信エラー・APIキー未設定・クォータ超過など）は、後述のフォールバック動画リストを表示する
 5. **フッター**
    - コピーライト表記のみ
 
@@ -61,30 +61,39 @@ TikTok（`@aaron.nottiktoker`、フォロワー約4,000〜1,000人規模のア�
 
 ## 6. データ構造（更新のしやすさ）
 
-`script.js` 内に以下のような設定オブジェクトを用意し、リンク・動画の追加/変更をこの部分の編集だけで完結させる。
+`script.js` 内に以下のような設定オブジェクトを用意する。
 
 ```js
 const LINKS = [
   { label: "Instagram", url: "https://instagram.com/aaronsta6ram", icon: "instagram" },
-  // X(Twitter)・TikTok本アカウント等はURL確定後に追加
+  // 他SNSを追加する場合はこの配列に1行足すだけ
 ];
 
-const VIDEOS = [
-  { id: "xxxxxxxxxxx", title: "動画タイトル" }, // 動画IDはユーザーから受領後に差し替え
+const YOUTUBE_CHANNEL_HANDLE = "@aaron.youtube.official";
+const YOUTUBE_API_KEY = "..."; // Google Cloud Consoleで発行、HTTPリファラー制限必須
+
+// API取得に失敗した場合に表示する手動フォールバック
+const FALLBACK_VIDEOS = [
+  { id: "xxxxxxxxxxx", title: "動画タイトル" },
 ];
 ```
 
 判明済みの実リンク:
-- YouTube（メインCTA）: `https://www.youtube.com/@aaron.youtube.official`
+- YouTube（メインCTA・自動取得対象）: `https://www.youtube.com/@aaron.youtube.official`
 - Instagram: `https://instagram.com/aaronsta6ram`
-- X(Twitter)・TikTok本アカウント・動画3〜6本のID: 実装開始前にユーザーへ確認
 
 サムネイルURLは動画IDから `https://i.ytimg.com/vi/{id}/hqdefault.jpg` の形式で自動生成する。
 
 ## 7. 技術構成
 
 - `index.html` / `style.css` / `script.js` の3ファイル構成（`AaronIntelligence_Web` と同一パターン）
-- ビルドツールなし
+- ビルドツールなし。動画取得はブラウザから直接 YouTube Data API v3 を `fetch` する（サーバーサイド不要）
+- **YouTube Data API v3 連携**
+  - 取得フロー: チャンネルハンドルからアップロード済み再生リストIDを取得 → その再生リストの最新動画（3〜6本）を取得 → 動画ID・タイトル・サムネイルを画面に反映
+  - APIキーはクライアントサイドのJSに埋め込む必要があるため、**Google Cloud ConsoleでHTTPリファラー制限（本番ドメイン・GitHub Pagesドメインのみ許可）を必須で設定**し、不正利用を防ぐ
+  - 無料枠のクォータ内で運用できる想定（1日1万ユニット、今回の呼び出しは訪問1回につき数ユニット程度）。取得結果は `localStorage` に一定時間（例: 1時間）キャッシュし、API呼び出し回数と表示速度の両方を改善する
+  - APIキーの発行はユーザー側のGoogle Cloudアカウントで行う（実装側では取得手順を案内し、発行されたキーを設定ファイルに反映する）
+  - 取得失敗時は `FALLBACK_VIDEOS` を表示し、ページ自体が壊れないようにする
 - ホスティング: GitHub Pages（無料）。ユーザーがカスタムドメイン（例: aaronofficial.com 系、取得予定）を取得次第、`CNAME` ファイルとDNS設定で紐付ける（本スペックでは実装のみ行い、ドメイン紐付け作業はドメイン取得後にユーザーと一緒に行う）
 - アセット: `assets/` にプロフィール写真・favicon等を配置（ユーザーから素材提供、または既存SNSの写真を使用）
 
@@ -101,3 +110,5 @@ const VIDEOS = [
 - 自己紹介文の本格的な執筆、写真ギャラリーページ（今回のセクション選定では「動画埋め込み」のみを採用。将来追加しやすい構造にはしておく）
 - 動画埋め込みのiframe方式（軽量なサムネイルリンク方式を採用したため対象外）
 - CMS化・多言語対応
+- YouTube以外のSNS（X、TikTok本アカウント等）へのリンク追加（今回はYouTube・Instagramの2つに確定。`LINKS`配列への追記のみで後日対応可能）
+- YouTube Data APIキーの発行作業そのもの（ユーザーのGoogleアカウントで行うため、実装側は手順案内とコードへの反映のみ担当）
