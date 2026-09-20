@@ -45,3 +45,53 @@ button { font-family: inherit; color: inherit; }
 @media (prefers-reduced-motion: reduce) {
   * { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
 }
+
+.profile {
+  display: grid;
+  justify-items: center;
+  gap: 10px;
+  text-align: center;
+}
+
+.avatar-placeholder {
+  width: 96px;
+  height: 96px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: var(--bg-elev);
+  border: 1px solid var(--border);
+  font-family: var(--display);
+  font-size: 40px;
+  color: var(--text-dim);
+}
+
+.name {
+  font-family: var(--display);
+  font-size: 28px;
+  letter-spacing: 0.02em;
+}
+
+.tagline {
+  font-size: 13px;
+  color: var(--text-mute);
+  letter-spacing: 0.04em;
+}
+
+.section-heading {
+  font-family: var(--display);
+  font-size: 18px;
+  letter-spacing: 0.04em;
+  color: var(--text-dim);
+  margin-bottom: 14px;
+}
+
+.site-footer {
+  text-align: center;
+  padding-top: 16px;
+}
+
+.copy {
+  font-size: 11px;
+  color: var(--text-mute);
+}
