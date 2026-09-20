@@ -164,7 +164,42 @@ button { font-family: inherit; color: inherit; }
   object-fit: cover;
 }
 
+.profile-info-frame {
+  position: relative;
+  width: min(360px, 100%);
+  margin: 20px auto;
+}
+
+@media (min-width: 720px) {
+  .profile-info-frame {
+    width: min(420px, 100%);
+    margin: 20px 0;
+  }
+}
+
+.frame-line {
+  position: absolute;
+  border: 1.5px solid rgba(245, 245, 242, 0.85);
+  pointer-events: none;
+}
+
+.frame-line--a {
+  inset: -20px;
+  transform: rotate(4deg);
+}
+
+.frame-line--b {
+  inset: -28px;
+  transform: rotate(-5deg);
+}
+
+.frame-line--c {
+  inset: -12px;
+  transform: rotate(1.5deg);
+}
+
 .profile-info {
+  position: relative;
   display: grid;
   place-items: center;
 }
@@ -176,8 +211,9 @@ button { font-family: inherit; color: inherit; }
 }
 
 .info-image {
-  width: min(420px, 100%);
+  width: 100%;
   height: auto;
+  display: block;
 }
 
 .sr-only {
