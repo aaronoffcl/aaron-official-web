@@ -115,8 +115,8 @@ button { font-family: inherit; color: inherit; }
 
 @media (min-width: 720px) {
   .profile-card {
-    grid-template-columns: minmax(240px, 360px) 1fr;
-    gap: 48px;
+    grid-template-columns: minmax(240px, 360px) minmax(240px, 360px);
+    gap: 64px;
   }
 }
 
@@ -166,14 +166,15 @@ button { font-family: inherit; color: inherit; }
 
 .profile-info-frame {
   position: relative;
-  width: min(360px, 100%);
+  width: min(320px, 100%);
+  aspect-ratio: 1 / 1;
   margin: 20px auto;
 }
 
 @media (min-width: 720px) {
   .profile-info-frame {
-    width: min(420px, 100%);
-    margin: 20px 0;
+    width: 100%;
+    margin: 0;
   }
 }
 
@@ -200,7 +201,9 @@ button { font-family: inherit; color: inherit; }
 
 .profile-info {
   position: relative;
+  height: 100%;
   display: grid;
+  align-content: center;
   gap: 12px;
   justify-items: center;
   text-align: center;
