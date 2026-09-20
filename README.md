@@ -22,11 +22,11 @@ TikTok/Instagramのプロフィールに貼る、YouTubeチャンネル誘導用
    - `www` サブドメイン(例: `www.aaronofficial.com`)を使う場合: CNAMEレコードを `<GitHubユーザー名>.github.io` に向ける
 5. GitHub Pages設定の「Enforce HTTPS」チェックボックスは、DNSの反映と証明書の発行が完了するまでグレーアウトしたままになる。反映には最大24時間程度かかることがあるので、すぐにチェックできなくても異常ではない
 
-## プロフィール写真・名前・キャッチコピーの変更方法
+## プロフィール写真・名前・プロフィール情報の変更方法
 
-- プロフィール写真: `index.html` 内の `<div class="avatar-placeholder" ...>A</div>` を、`assets/` に置いた画像ファイルを参照する `<img>` タグに置き換える(例: `<img src="assets/profile.jpg" alt="">`)
-- 名前: `index.html` 内の `.name` クラスが付いた要素(`<h1 class="name">Aaron / アーロン</h1>`)のテキストを直接編集する
-- キャッチコピー: `index.html` 内の `.tagline` クラスが付いた要素(`<p class="tagline">毎日更新中</p>`)のテキストを直接編集する
+- プロフィール写真: `assets/profile-photo.jpg` を差し替える(同じファイル名で上書きすればHTML側の変更は不要。ファイル名を変える場合は `index.html` 内の `.profile-photo img` の `src` も合わせて変更する)
+- 名前: `index.html` 内の `.info-name` クラスが付いた見出し(`<h1 class="info-name">Aaron Kuwamoto</h1>`)のテキストを直接編集する
+- 生年月日・出身地・メール・肩書き: `index.html` 内の `.info-lines` 内にある `.info-line` 各行を直接編集する
 
 ## YouTube Data API キーの発行手順(最新動画の自動取得に必要)
 
@@ -40,9 +40,8 @@ TikTok/Instagramのプロフィールに貼る、YouTubeチャンネル誘導用
 
 **警告:** このサイトは無料のGitHub Pagesで公開するため、リポジトリ(したがって `script.js` に書き込むAPIキー)は**公開(public)**になる。また、キーを後からファイルから削除しても、git履歴には残り続ける。もしキーが漏洩・悪用された場合、`script.js` を編集するだけでは不十分で、**Google Cloud Consoleでそのキー自体を削除・再発行(ローテーション)する**必要がある。
 
-## リンク・動画の更新方法
+## SNSリンク・News・動画の更新方法
 
-`script.js` の先頭付近にある配列を編集するだけで反映される。
-
-- `LINKS`: Instagram以外のSNSリンクを追加する場合、配列に `{ label: "表示名", url: "URL", icon: "アイコン名" }` を1行追加する
-- `FALLBACK_VIDEOS`: YouTube APIが失敗した場合に表示される動画リスト。たまに手動で最新の動画IDに更新しておくと安心
+- **SNSリンク(ヘッダーのアイコン)**: `index.html` 内の `.site-nav-icons` にある `<a>` を編集・追加する(YouTube・Instagramの2つが現状)
+- **News**: `script.js` 先頭付近の `NEWS` 配列に `{ date: "YYYY MM/DD", text: "お知らせ本文" }` を1行追加する。配列の先頭に足せば新しいお知らせが一番上に表示される
+- **動画**: `script.js` の `FALLBACK_VIDEOS` 配列を編集する。YouTube APIが失敗した場合に表示される動画リストなので、たまに手動で最新の動画IDに更新しておくと安心
