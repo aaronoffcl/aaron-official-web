@@ -7,7 +7,7 @@
   --border: rgba(255, 255, 255, 0.1);
   --accent-youtube: #ff2f2f;
   --ease: cubic-bezier(0.16, 1, 0.3, 1);
-  --display: "Bebas Neue", "Impact", sans-serif;
+  --display: "Bebas Neue", "Zen Kaku Gothic New", "Impact", sans-serif;
   --body: "Inter", "Hiragino Sans", sans-serif;
 }
 
@@ -121,6 +121,11 @@ button { font-family: inherit; color: inherit; }
   filter: brightness(1.08);
 }
 
+.cta-youtube:focus-visible {
+  outline: 2px solid var(--text);
+  outline-offset: 2px;
+}
+
 .cta-icon { font-size: 14px; }
 
 .sublinks {
@@ -131,7 +136,7 @@ button { font-family: inherit; color: inherit; }
 }
 
 .link-btn {
-  height: 40px;
+  height: 44px;
   padding: 0 18px;
   border-radius: 999px;
   border: 1px solid var(--border);
@@ -147,14 +152,15 @@ button { font-family: inherit; color: inherit; }
   color: var(--text);
 }
 
+.link-btn:focus-visible {
+  outline: 2px solid var(--text);
+  outline-offset: 2px;
+}
+
 .video-grid {
   display: grid;
   grid-template-columns: 1fr;
   gap: 14px;
-}
-
-@media (min-width: 560px) {
-  .video-grid { grid-template-columns: repeat(2, 1fr); }
 }
 
 .video-card {
@@ -163,6 +169,11 @@ button { font-family: inherit; color: inherit; }
   border-radius: 12px;
   overflow: hidden;
   background: var(--bg-elev);
+}
+
+.video-card:focus-visible {
+  outline: 2px solid var(--text);
+  outline-offset: 2px;
 }
 
 .video-thumb {

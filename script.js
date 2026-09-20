@@ -14,16 +14,40 @@ const YOUTUBE_API_KEY = "YOUR_YOUTUBE_API_KEY_HERE"; // Google Cloud Consoleで�
 const VIDEO_CACHE_KEY = "aaron-official:videos-cache";
 const VIDEO_CACHE_TTL_MS = 60 * 60 * 1000; // 1時間
 
-function readVideoCache() {
+function parseVideoCacheEntry(raw) {
+  const parsed = JSON.parse(raw);
+  if (!parsed || typeof parsed !== "object") return null;
+  const { videos, savedAt } = parsed;
+  if (!Array.isArray(videos) || typeof savedAt !== "number") return null;
+  const validVideos = videos.filter((video) => video && video.id && video.title);
+  if (!validVideos.length) return null;
+  return { videos: validVideos, savedAt };
+}
+
+// キャッシュの生データを読み込む(TTLは考慮しない)。壊れたエントリはnullを返す
+function readRawVideoCache() {
   try {
     const raw = localStorage.getItem(VIDEO_CACHE_KEY);
     if (!raw) return null;
-    const { videos, savedAt } = JSON.parse(raw);
-    if (!Array.isArray(videos) || Date.now() - savedAt > VIDEO_CACHE_TTL_MS) return null;
-    return videos;
+    return parseVideoCacheEntry(raw);
   } catch (error) {
     return null;
   }
+}
+
+// TTL内の有効なキャッシュのみ返す
+function readVideoCache() {
+  const entry = readRawVideoCache();
+  if (!entry) return null;
+  if (Date.now() - entry.savedAt > VIDEO_CACHE_TTL_MS) return null;
+  return entry.videos;
+}
+
+// TTLが切れていても、動画が残っていればそのまま返す(ライブ取得が失敗したときの最終手段)
+function readStaleVideoCache() {
+  const entry = readRawVideoCache();
+  if (!entry) return null;
+  return entry.videos;
 }
 
 function writeVideoCache(videos) {
@@ -48,7 +72,7 @@ async function fetchLatestVideos() {
     if (!uploadsPlaylistId) throw new Error("uploads playlist not found");
 
     const itemsRes = await fetch(
-      `https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&maxResults=6&playlistId=${uploadsPlaylistId}&key=${YOUTUBE_API_KEY}`
+      `https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&maxResults=4&playlistId=${uploadsPlaylistId}&key=${YOUTUBE_API_KEY}`
     );
     if (!itemsRes.ok) throw new Error(`playlistItems API failed: ${itemsRes.status}`);
     const itemsData = await itemsRes.json();
@@ -65,6 +89,8 @@ async function fetchLatestVideos() {
     return videos;
   } catch (error) {
     console.warn("YouTube video fetch failed, using fallback:", error);
+    const stale = readStaleVideoCache();
+    if (stale && stale.length) return stale;
     return null;
   }
 }
@@ -100,7 +126,7 @@ function renderVideos(videos, container) {
     thumbWrap.className = "video-thumb";
     const img = document.createElement("img");
     img.src = youtubeThumbnailUrl(video.id);
-    img.alt = video.title;
+    img.alt = "";
     img.loading = "lazy";
     const playIcon = document.createElement("span");
     playIcon.className = "video-play";
@@ -123,8 +149,13 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   const videosEl = document.getElementById("videos-grid");
   if (videosEl) {
-    renderVideos(FALLBACK_VIDEOS, videosEl);
-    const liveVideos = await fetchLatestVideos();
-    if (liveVideos && liveVideos.length) renderVideos(liveVideos, videosEl);
+    const cached = readVideoCache();
+    if (cached && cached.length) {
+      renderVideos(cached, videosEl);
+    } else {
+      renderVideos(FALLBACK_VIDEOS, videosEl);
+      const liveVideos = await fetchLatestVideos();
+      if (liveVideos && liveVideos.length) renderVideos(liveVideos, videosEl);
+    }
   }
 });
