@@ -111,14 +111,14 @@ button { font-family: inherit; color: inherit; }
 
 .profile-card {
   display: grid;
-  gap: 24px;
+  gap: 56px;
   align-items: center;
 }
 
 @media (min-width: 720px) {
   .profile-card {
     grid-template-columns: minmax(240px, 360px) minmax(240px, 360px);
-    gap: 64px;
+    gap: 110px;
   }
 }
 
@@ -170,7 +170,7 @@ button { font-family: inherit; color: inherit; }
   position: relative;
   width: min(360px, 100%);
   aspect-ratio: 5 / 3;
-  margin: 20px auto;
+  margin: 32px auto;
 }
 
 @media (min-width: 720px) {
