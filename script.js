@@ -1,7 +1,3 @@
-const LINKS = [
-  { label: "Instagram", url: "https://instagram.com/aaronsta6ram", icon: "instagram" },
-];
-
 const FALLBACK_VIDEOS = [
   { id: "xOtNTlCKPvU", title: "アーロンの助手席はこんな感じ" },
   { id: "npFVvUjYvIQ", title: "もう限界なので実家に帰ります" },
@@ -95,20 +91,6 @@ async function fetchLatestVideos() {
   }
 }
 
-function renderLinks(links, container) {
-  container.innerHTML = "";
-  links.forEach((link) => {
-    const a = document.createElement("a");
-    a.className = "link-btn";
-    a.href = link.url;
-    a.target = "_blank";
-    a.rel = "noopener";
-    a.dataset.icon = link.icon;
-    a.textContent = link.label;
-    container.appendChild(a);
-  });
-}
-
 function youtubeThumbnailUrl(id) {
   return `https://i.ytimg.com/vi/${id}/hqdefault.jpg`;
 }
@@ -155,9 +137,6 @@ function initHeroVideo() {
 
 document.addEventListener("DOMContentLoaded", async () => {
   initHeroVideo();
-
-  const sublinksEl = document.getElementById("sublinks");
-  if (sublinksEl) renderLinks(LINKS, sublinksEl);
 
   const videosEl = document.getElementById("videos-grid");
   if (videosEl) {
