@@ -17,7 +17,7 @@
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700&family=Zen+Kaku+Gothic+New:wght@700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Caveat:wght@600;700&family=Inter:wght@400;500;600;700&family=Zen+Kaku+Gothic+New:wght@700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -47,27 +47,19 @@
   </section>
   <main class="page">
     <section class="profile-card">
-      <div class="profile-photo">
-        <img src="assets/profile-photo.jpg" alt="Aaron / アーロン" width="1050" height="1400">
+      <div class="profile-photo-frame">
+        <div class="profile-photo">
+          <img src="assets/profile-photo.jpg" alt="Aaron / アーロン" width="1050" height="1400">
+        </div>
       </div>
       <div class="profile-info">
-        <p class="profile-eyebrow">PROFILE</p>
-        <h1 class="name">Aaron / アーロン</h1>
-        <p class="tagline">毎日更新中</p>
-        <dl class="profile-facts">
-          <div>
-            <dt>生年月日</dt>
-            <dd>2005年1月13日</dd>
-          </div>
-          <div>
-            <dt>出身地</dt>
-            <dd>愛知県蒲郡市</dd>
-          </div>
-          <div>
-            <dt>職業</dt>
-            <dd>コンテンツクリエイター / プログラマー / メンタルケアサービス運営</dd>
-          </div>
-        </dl>
+        <div class="info-cloud" aria-hidden="true"></div>
+        <div class="info-content">
+          <h1 class="info-name">Aaron</h1>
+          <p class="info-line">2005.01.13</p>
+          <p class="info-line">Aichi Japan</p>
+          <p class="info-line">Creator<br>Programmer</p>
+        </div>
       </div>
     </section>
 
