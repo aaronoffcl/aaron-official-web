@@ -143,7 +143,83 @@ function renderVideos(videos, container) {
   });
 }
 
+function initHeroRain() {
+  const hero = document.querySelector(".hero");
+  const canvas = document.querySelector(".hero-rain");
+  if (!hero || !canvas) return;
+  const ctx = canvas.getContext("2d");
+  if (!ctx) return;
+
+  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const dpr = window.devicePixelRatio || 1;
+  let width = 0;
+  let height = 0;
+  let drops = [];
+
+  function createDrop() {
+    return {
+      x: Math.random() * width,
+      y: Math.random() * height,
+      length: 14 + Math.random() * 20,
+      speed: 7 + Math.random() * 9,
+      opacity: 0.15 + Math.random() * 0.35,
+    };
+  }
+
+  function resize() {
+    width = hero.clientWidth;
+    height = hero.clientHeight;
+    canvas.width = width * dpr;
+    canvas.height = height * dpr;
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    const dropCount = Math.round((width * height) / 6000);
+    drops = Array.from({ length: dropCount }, createDrop);
+  }
+
+  function drawFrame() {
+    ctx.clearRect(0, 0, width, height);
+    ctx.lineWidth = 1;
+    drops.forEach((drop) => {
+      ctx.globalAlpha = drop.opacity;
+      ctx.strokeStyle = "rgba(210, 225, 245, 0.8)";
+      ctx.beginPath();
+      ctx.moveTo(drop.x, drop.y);
+      ctx.lineTo(drop.x - drop.length * 0.08, drop.y + drop.length);
+      ctx.stroke();
+    });
+    ctx.globalAlpha = 1;
+  }
+
+  function advanceDrops() {
+    drops.forEach((drop) => {
+      drop.y += drop.speed;
+      drop.x -= drop.speed * 0.08;
+      if (drop.y > height) {
+        drop.y = -drop.length;
+        drop.x = Math.random() * width;
+      }
+    });
+  }
+
+  function loop() {
+    drawFrame();
+    advanceDrops();
+    requestAnimationFrame(loop);
+  }
+
+  resize();
+  window.addEventListener("resize", resize);
+
+  if (reduceMotion) {
+    drawFrame();
+  } else {
+    loop();
+  }
+}
+
 document.addEventListener("DOMContentLoaded", async () => {
+  initHeroRain();
+
   const sublinksEl = document.getElementById("sublinks");
   if (sublinksEl) renderLinks(LINKS, sublinksEl);
 
