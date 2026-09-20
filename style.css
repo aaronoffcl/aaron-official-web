@@ -95,3 +95,54 @@ button { font-family: inherit; color: inherit; }
   font-size: 11px;
   color: var(--text-mute);
 }
+
+.links {
+  display: grid;
+  gap: 12px;
+}
+
+.cta-youtube {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  height: 56px;
+  border-radius: 12px;
+  background: var(--accent-youtube);
+  color: #fff;
+  font-family: var(--display);
+  font-size: 18px;
+  letter-spacing: 0.04em;
+  transition: transform 0.2s var(--ease), filter 0.2s;
+}
+
+.cta-youtube:hover, .cta-youtube:active {
+  transform: translateY(-1px);
+  filter: brightness(1.08);
+}
+
+.cta-icon { font-size: 14px; }
+
+.sublinks {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+}
+
+.link-btn {
+  height: 40px;
+  padding: 0 18px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  display: inline-flex;
+  align-items: center;
+  font-size: 13px;
+  color: var(--text-dim);
+  transition: border-color 0.2s, color 0.2s;
+}
+
+.link-btn:hover {
+  border-color: var(--text-dim);
+  color: var(--text);
+}
