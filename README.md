@@ -43,5 +43,5 @@ TikTok/Instagramのプロフィールに貼る、YouTubeチャンネル誘導用
 ## SNSリンク・News・動画の更新方法
 
 - **SNSリンク(ヘッダーのアイコン)**: `index.html` 内の `.site-nav-icons` にある `<a>` を編集・追加する(YouTube・Instagramの2つが現状)
-- **News**: `script.js` 先頭付近の `NEWS` 配列に `{ date: "YYYY MM/DD", text: "お知らせ本文" }` を1行追加する。配列の先頭に足せば新しいお知らせが一番上に表示される
+- **News**: `script.js` 先頭付近の `NEWS` 配列に `{ date: "YYYY MM/DD", text: "お知らせ本文", url: "news/連番.html" }` を1行追加する(配列の先頭に足せば新しいお知らせが一番上に表示される)。`url` で指定したファイルは `news/1.html` などをコピーして新しく作成し、日付・タイトル・本文を書き換える
 - **動画**: `script.js` の `FALLBACK_VIDEOS` 配列を編集する。YouTube APIが失敗した場合に表示される動画リストなので、たまに手動で最新の動画IDに更新しておくと安心

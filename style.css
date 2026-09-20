@@ -294,9 +294,21 @@ button { font-family: inherit; color: inherit; }
 }
 
 .news-text {
+  display: block;
   font-family: var(--serif);
   font-size: clamp(14px, 2vw, 17px);
   color: var(--text-dim);
+  transition: color 0.2s;
+}
+
+.news-text:hover,
+.news-text:focus-visible {
+  color: var(--text);
+}
+
+.news-text:focus-visible {
+  outline: 2px solid var(--text);
+  outline-offset: 2px;
 }
 
 .news-date {
@@ -365,4 +377,48 @@ button { font-family: inherit; color: inherit; }
   padding: 10px 12px;
   font-size: 13px;
   color: var(--text-dim);
+}
+
+.article-page {
+  padding-top: 120px;
+}
+
+.article {
+  width: min(680px, 100%);
+  margin: 0 auto;
+  display: grid;
+  gap: 16px;
+}
+
+.article-date {
+  font-family: var(--serif);
+  font-weight: 600;
+  color: var(--text-mute);
+}
+
+.article-title {
+  font-family: var(--display);
+  font-size: clamp(24px, 4vw, 34px);
+  letter-spacing: 0.02em;
+}
+
+.article-body {
+  display: grid;
+  gap: 16px;
+  font-family: var(--serif);
+  font-size: 16px;
+  line-height: 1.9;
+  color: var(--text-dim);
+}
+
+.article-back {
+  margin-top: 24px;
+  font-size: 13px;
+  color: var(--text-mute);
+  transition: color 0.2s;
+}
+
+.article-back:hover,
+.article-back:focus-visible {
+  color: var(--text);
 }

@@ -1,6 +1,6 @@
 const NEWS = [
-  { date: "2026 05/25", text: "TikTokのアカウントを変更しました" },
-  { date: "2026 01/02", text: "私がニュースになっている件について" },
+  { date: "2026 05/25", text: "TikTokのアカウントを変更しました", url: "news/1.html" },
+  { date: "2026 01/02", text: "私がニュースになっている件について", url: "news/2.html" },
 ];
 
 function renderNews(items, container) {
@@ -15,8 +15,9 @@ function renderNews(items, container) {
     arrow.textContent = "→";
     li.appendChild(arrow);
 
-    const text = document.createElement("p");
+    const text = document.createElement("a");
     text.className = "news-text";
+    text.href = item.url;
     const date = document.createElement("span");
     date.className = "news-date";
     date.textContent = item.date;
