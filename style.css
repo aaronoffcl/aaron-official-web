@@ -100,7 +100,7 @@ button { font-family: inherit; color: inherit; }
 .page {
   width: min(960px, 100%);
   margin: 0 auto;
-  padding: 40px 20px 64px;
+  padding: 40px 32px 64px;
   display: grid;
   gap: 40px;
 }
@@ -145,11 +145,11 @@ button { font-family: inherit; color: inherit; }
 }
 
 .profile-photo-frame::before {
-  transform: rotate(-3deg);
+  transform: rotate(-2.5deg);
 }
 
 .profile-photo-frame::after {
-  transform: rotate(2deg);
+  transform: rotate(2.5deg);
 }
 
 .profile-photo {
@@ -187,18 +187,18 @@ button { font-family: inherit; color: inherit; }
 }
 
 .frame-line--a {
-  inset: -20px;
-  transform: rotate(4deg);
+  inset: -14px;
+  transform: rotate(3deg);
 }
 
 .frame-line--b {
-  inset: -28px;
-  transform: rotate(-5deg);
+  inset: -18px;
+  transform: rotate(-3deg);
 }
 
 .frame-line--c {
-  inset: -12px;
-  transform: rotate(1.5deg);
+  inset: -8px;
+  transform: rotate(1deg);
 }
 
 .profile-info {
