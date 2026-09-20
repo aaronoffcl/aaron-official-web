@@ -1,3 +1,44 @@
+const NEWS = [
+  { date: "2026 06/14", text: "TikTokのアカウントを変更しました" },
+];
+
+const SVG_NS = "http://www.w3.org/2000/svg";
+
+function createNewsDivider() {
+  const svg = document.createElementNS(SVG_NS, "svg");
+  svg.setAttribute("class", "news-divider");
+  svg.setAttribute("viewBox", "0 0 400 20");
+  svg.setAttribute("preserveAspectRatio", "none");
+  svg.setAttribute("aria-hidden", "true");
+  svg.innerHTML = `
+    <line x1="26" y1="10" x2="374" y2="10" stroke="currentColor" stroke-width="1" />
+    <polygon points="0,10 22,4 22,16" fill="currentColor" />
+    <polygon points="400,10 378,4 378,16" fill="currentColor" />
+    <circle cx="38" cy="10" r="2" fill="currentColor" />
+    <circle cx="362" cy="10" r="2" fill="currentColor" />
+  `;
+  return svg;
+}
+
+function renderNews(items, container) {
+  container.innerHTML = "";
+  items.forEach((item) => {
+    const li = document.createElement("li");
+    li.className = "news-item";
+    li.appendChild(createNewsDivider());
+
+    const text = document.createElement("p");
+    text.className = "news-text";
+    const date = document.createElement("span");
+    date.className = "news-date";
+    date.textContent = item.date;
+    text.append(date, document.createTextNode(item.text));
+
+    li.appendChild(text);
+    container.appendChild(li);
+  });
+}
+
 const FALLBACK_VIDEOS = [
   { id: "xOtNTlCKPvU", title: "アーロンの助手席はこんな感じ" },
   { id: "npFVvUjYvIQ", title: "もう限界なので実家に帰ります" },
@@ -137,6 +178,9 @@ function initHeroVideo() {
 
 document.addEventListener("DOMContentLoaded", async () => {
   initHeroVideo();
+
+  const newsEl = document.getElementById("news-list");
+  if (newsEl) renderNews(NEWS, newsEl);
 
   const videosEl = document.getElementById("videos-grid");
   if (videosEl) {
