@@ -276,29 +276,32 @@ button { font-family: inherit; color: inherit; }
 .news-list {
   list-style: none;
   display: grid;
-  gap: 28px;
+  gap: 22px;
+}
+
+.news-item {
+  display: flex;
+  align-items: baseline;
+  gap: 20px;
+}
+
+.news-arrow {
+  flex: none;
+  font-family: var(--serif);
+  font-weight: 600;
+  color: var(--text);
 }
 
 .news-text {
   font-family: var(--serif);
   font-size: clamp(14px, 2vw, 17px);
   color: var(--text-dim);
-  text-align: center;
 }
 
 .news-date {
   font-weight: 600;
   color: var(--text);
   margin-right: 12px;
-}
-
-.news-underline {
-  display: block;
-  width: 100%;
-  height: 2px;
-  margin-top: 12px;
-  background: var(--text);
-  transform: rotate(-0.4deg);
 }
 
 .site-footer {

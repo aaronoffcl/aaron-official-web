@@ -1,5 +1,6 @@
 const NEWS = [
-  { date: "2026 06/14", text: "TikTokのアカウントを変更しました" },
+  { date: "2026 05/25", text: "TikTokのアカウントを変更しました" },
+  { date: "2026 01/02", text: "私がニュースになっている件について" },
 ];
 
 function renderNews(items, container) {
@@ -8,6 +9,12 @@ function renderNews(items, container) {
     const li = document.createElement("li");
     li.className = "news-item";
 
+    const arrow = document.createElement("span");
+    arrow.className = "news-arrow";
+    arrow.setAttribute("aria-hidden", "true");
+    arrow.textContent = "→";
+    li.appendChild(arrow);
+
     const text = document.createElement("p");
     text.className = "news-text";
     const date = document.createElement("span");
@@ -15,11 +22,6 @@ function renderNews(items, container) {
     date.textContent = item.date;
     text.append(date, document.createTextNode(item.text));
     li.appendChild(text);
-
-    const underline = document.createElement("span");
-    underline.className = "news-underline";
-    underline.setAttribute("aria-hidden", "true");
-    li.appendChild(underline);
 
     container.appendChild(li);
   });
