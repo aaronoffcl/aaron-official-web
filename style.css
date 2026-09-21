@@ -411,6 +411,18 @@ button { font-family: inherit; color: inherit; }
   color: var(--text-dim);
 }
 
+.article-figure {
+  width: min(360px, 100%);
+  margin: 4px auto;
+}
+
+.article-figure img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+}
+
 .article-back {
   margin-top: 24px;
   font-size: 13px;

@@ -1,6 +1,6 @@
 const NEWS = [
   { date: "2026 05/25", text: "TikTokのアカウントを変更しました", url: "news/1.html" },
-  { date: "2026 01/02", text: "私がニュースになっている件について", url: "news/2.html" },
+  { date: "2026 01/03", text: "私がニュースになっている件について", url: "news/2.html" },
 ];
 
 function renderNews(items, container) {
