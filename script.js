@@ -130,7 +130,9 @@ function renderVideos(videos, container) {
   videos.forEach((video) => {
     const a = document.createElement("a");
     a.className = "video-card";
-    a.href = `go.html?to=video&id=${video.id}`;
+    a.href = `https://www.youtube.com/watch?v=${video.id}`;
+    a.target = "_blank";
+    a.rel = "noopener";
 
     const thumbWrap = document.createElement("div");
     thumbWrap.className = "video-thumb";
