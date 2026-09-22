@@ -109,6 +109,57 @@ button { font-family: inherit; color: inherit; }
   * { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
 }
 
+.youtube-promo {
+  display: grid;
+  justify-items: center;
+  gap: 14px;
+  text-align: center;
+}
+
+.youtube-promo-title {
+  font-family: var(--script);
+  font-weight: 700;
+  font-size: clamp(36px, 6vw, 52px);
+  color: var(--text);
+}
+
+.youtube-promo-text {
+  font-family: var(--serif);
+  font-weight: 600;
+  font-size: clamp(15px, 2.4vw, 19px);
+  color: var(--text);
+}
+
+.youtube-promo-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: #fff;
+  color: #0b0b0c;
+  padding: 14px 28px;
+  border-radius: 6px;
+  font-family: var(--body);
+  font-weight: 700;
+  font-size: 18px;
+  transition: transform 0.2s var(--ease), filter 0.2s;
+}
+
+.youtube-promo-badge svg {
+  color: #ff0000;
+  flex: none;
+}
+
+.youtube-promo-badge:hover,
+.youtube-promo-badge:active {
+  transform: translateY(-1px);
+  filter: brightness(0.96);
+}
+
+.youtube-promo-badge:focus-visible {
+  outline: 2px solid var(--text);
+  outline-offset: 3px;
+}
+
 .profile-card {
   display: grid;
   gap: 56px;
