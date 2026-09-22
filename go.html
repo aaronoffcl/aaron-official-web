@@ -3,17 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Aaron / アーロン</title>
-  <meta name="description" content="Aaron / アーロン 公式リンクページ。YouTube・Instagramはこちら。">
+  <title>YouTubeへ移動 | Aaron / アーロン</title>
+  <meta name="robots" content="noindex">
   <meta name="theme-color" content="#0b0b0c">
-  <meta property="og:title" content="Aaron / アーロン">
-  <meta property="og:description" content="Aaron / アーロン 公式リンクページ。YouTube・Instagramはこちら。">
-  <meta property="og:image" content="https://aaron-official.com/assets/profile-photo.jpg">
-  <meta property="og:url" content="https://aaron-official.com/">
-  <meta property="og:type" content="website">
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Aaron / アーロン">
-  <meta name="twitter:description" content="Aaron / アーロン 公式リンクページ。YouTube・Instagramはこちら。">
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -30,7 +22,7 @@
           <path fill="#fff" d="M16.6 5.82s.51.5 0 0A4.278 4.278 0 0 1 15.54 3h-3.09v12.4a2.592 2.592 0 0 1-2.59 2.5c-1.42 0-2.6-1.16-2.6-2.6c0-1.72 1.66-3.01 3.37-2.48V9.66c-3.45-.46-6.47 2.22-6.47 5.64c0 3.33 2.76 5.7 5.69 5.7c3.14 0 5.69-2.55 5.69-5.7V9.01a7.35 7.35 0 0 0 4.3 1.38V7.3s-1.88.09-3.24-1.48z"/>
         </svg>
       </a>
-      <a href="go.html?to=channel" aria-label="YouTube">
+      <a href="https://www.youtube.com/@aaron.youtube.official" target="_blank" rel="noopener" aria-label="YouTube">
         <svg viewBox="0 0 24 24" width="30" height="30" aria-hidden="true">
           <path fill="#FF0000" d="M22 12s0-3.4-.44-5A2.8 2.8 0 0 0 19.6 5C17.9 4.6 12 4.6 12 4.6s-5.9 0-7.6.4A2.8 2.8 0 0 0 2.44 7 29 29 0 0 0 2 12a29 29 0 0 0 .44 5A2.8 2.8 0 0 0 4.4 19c1.7.4 7.6.4 7.6.4s5.9 0 7.6-.4a2.8 2.8 0 0 0 1.96-2 29 29 0 0 0 .44-5Z"/>
           <path fill="#fff" d="M10 15.2V8.8L15.6 12Z"/>
@@ -55,66 +47,33 @@
     </nav>
   </header>
 
-  <section class="hero">
-    <video
-      class="hero-video"
-      src="assets/hero-rain.mp4"
-      poster="assets/hero-rain-poster.jpg"
-      autoplay
-      muted
-      loop
-      playsinline
-      preload="auto"
-    ></video>
-  </section>
-  <main class="page">
+  <main class="page article-page">
     <section class="youtube-promo">
       <h2 class="youtube-promo-title">YouTube</h2>
-      <p class="youtube-promo-text">⬇TikTokでは聞けない話を配信中！こちらをタップ⬇</p>
-      <a class="youtube-promo-badge" href="go.html?to=channel" aria-label="YouTubeチャンネルへ">
+      <p class="youtube-promo-text">下のボタンをタップして開いてください</p>
+      <a id="redirect-cta" class="youtube-promo-badge" href="https://www.youtube.com/@aaron.youtube.official" target="_blank" rel="noopener" aria-label="YouTubeを開く">
         <svg viewBox="0 0 24 24" width="26" height="26" aria-hidden="true"><path fill="currentColor" d="M22 12s0-3.4-.44-5A2.8 2.8 0 0 0 19.6 5C17.9 4.6 12 4.6 12 4.6s-5.9 0-7.6.4A2.8 2.8 0 0 0 2.44 7 29 29 0 0 0 2 12a29 29 0 0 0 .44 5A2.8 2.8 0 0 0 4.4 19c1.7.4 7.6.4 7.6.4s5.9 0 7.6-.4a2.8 2.8 0 0 0 1.96-2 29 29 0 0 0 .44-5ZM10 15.2V8.8L15.6 12Z"/></svg>
-        <span>YouTube</span>
+        <span>YouTubeを開く</span>
       </a>
     </section>
-
-    <section class="videos" aria-label="最新動画">
-      <h2 class="section-heading">New Video</h2>
-      <div class="video-grid" id="videos-grid"></div>
-    </section>
-
-    <section class="profile-card">
-      <div class="profile-photo-frame">
-        <div class="profile-photo">
-          <img src="assets/profile-photo.jpg" alt="Aaron / アーロン" width="1050" height="1400">
-        </div>
-      </div>
-      <div class="profile-info-frame">
-        <span class="frame-line frame-line--a" aria-hidden="true"></span>
-        <span class="frame-line frame-line--b" aria-hidden="true"></span>
-        <span class="frame-line frame-line--c" aria-hidden="true"></span>
-        <div class="profile-info">
-          <h1 class="info-name">Aaron</h1>
-          <div class="info-lines">
-            <p class="info-line">2005.01/13</p>
-            <p class="info-line">From: Aichi Japan</p>
-            <p class="info-line">Mail: <a href="mailto:aaron.offcl@gmail.com">aaron.offcl@gmail.com</a></p>
-            <p class="info-line">Content Creator / Programmer</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="news" aria-label="News">
-      <div class="news-badge">
-        <span class="news-badge-text">News</span>
-      </div>
-      <ul class="news-list" id="news-list"></ul>
-    </section>
-
-    <footer class="site-footer">
-      <p class="copy">&copy; Aaron</p>
-    </footer>
+    <p style="text-align:center;">
+      <a class="article-back" href="index.html">← トップに戻る</a>
+    </p>
   </main>
-  <script src="script.js?v=2"></script>
+
+  <script>
+    (function () {
+      var params = new URLSearchParams(window.location.search);
+      var dest = params.get("to");
+      var id = params.get("id");
+      var CHANNEL_URL = "https://www.youtube.com/@aaron.youtube.official";
+      var url = CHANNEL_URL;
+      if (dest === "video" && id && /^[A-Za-z0-9_-]{6,15}$/.test(id)) {
+        url = "https://www.youtube.com/watch?v=" + id;
+      }
+      var cta = document.getElementById("redirect-cta");
+      cta.href = url;
+    })();
+  </script>
 </body>
 </html>
