@@ -300,12 +300,16 @@ button { font-family: inherit; color: inherit; }
   color: var(--text);
 }
 
+.videos {
+  margin-bottom: 56px;
+}
+
 .section-heading {
-  font-family: var(--display);
-  font-size: 18px;
-  letter-spacing: 0.04em;
-  color: var(--text-dim);
-  margin-bottom: 14px;
+  font-family: var(--script);
+  font-weight: 700;
+  font-size: 40px;
+  color: var(--text);
+  margin-bottom: 20px;
 }
 
 .news {
