@@ -10,16 +10,19 @@ TikTok/Instagramのプロフィールに貼る、YouTubeチャンネル誘導用
 
 ## 公開(GitHub Pages)
 
-1. このリポジトリをGitHubに作成しプッシュする
+このサイトのドメインは **`aaron-official.com`**(Cloudflareで取得済み)。リポジトリ直下の `CNAME` ファイルにも設定済みなので、GitHub側は以下の手順だけでよい。
+
+1. このリポジトリをGitHubに作成しプッシュする(`CNAME` ファイルも一緒にpushされる)
 2. GitHubのリポジトリ設定 → Pages → Branch を `main`、フォルダを `/ (root)` に設定する
-3. カスタムドメインを取得したら、`CNAME` という名前のファイル(拡張子なし)を作成し、中身にドメイン名(例: `aaronofficial.com`)だけを書いてリポジトリ直下に置く
-4. ドメイン側のDNSを設定する
-   - 頂点ドメイン(例: `aaronofficial.com`)を使う場合: Aレコードを以下の4つすべてに設定する
+3. 同じPages設定画面の「Custom domain」欄に `aaron-official.com` と入力して Save する(すでにリポジトリに `CNAME` ファイルがあるので自動で認識されるはずだが、念のため手動でも設定する)
+4. **Cloudflareダッシュボードで** DNSレコードを設定する(ドメインをCloudflareで取得しているため、DNS設定もCloudflareの管理画面 [dash.cloudflare.com](https://dash.cloudflare.com/) → 対象ドメイン → DNS で行う)
+   - 頂点ドメイン `aaron-official.com` 用に、Aレコードを以下の4つすべて追加する(Name欄は `@`)
      - `185.199.108.153`
      - `185.199.109.153`
      - `185.199.110.153`
      - `185.199.111.153`
-   - `www` サブドメイン(例: `www.aaronofficial.com`)を使う場合: CNAMEレコードを `<GitHubユーザー名>.github.io` に向ける
+   - `www.aaron-official.com` も使いたい場合は、CNAMEレコード(Name: `www`)を `<GitHubユーザー名>.github.io` に向ける
+   - 各レコードの「Proxy status」は、最初は **DNS only(グレーの雲アイコン)** にしておく。オレンジの雲(Proxied)にするとCloudflare経由になり便利な機能も使えるが、GitHub PagesのSSL証明書発行と干渉して表示されなくなることがあるため、まずはDNS onlyで動作確認してから必要に応じて切り替える
 5. GitHub Pages設定の「Enforce HTTPS」チェックボックスは、DNSの反映と証明書の発行が完了するまでグレーアウトしたままになる。反映には最大24時間程度かかることがあるので、すぐにチェックできなくても異常ではない
 
 ## プロフィール写真・名前・プロフィール情報の変更方法
@@ -33,7 +36,7 @@ TikTok/Instagramのプロフィールに貼る、YouTubeチャンネル誘導用
 1. https://console.cloud.google.com/ にアクセスし、新しいプロジェクトを作成する
 2. 「APIとサービス」→「ライブラリ」で **YouTube Data API v3** を検索して有効化する
 3. 「APIとサービス」→「認証情報」→「認証情報を作成」→「APIキー」でキーを発行する
-4. 発行したキーの「アプリケーションの制限」を **HTTPリファラー** にし、公開予定のドメイン(例: `https://aaronofficial.com/*` や `https://<ユーザー名>.github.io/*`)を許可リストに追加する(これを設定しないと誰でもキーを使えてしまうため必須)
+4. 発行したキーの「アプリケーションの制限」を **HTTPリファラー** にし、`https://aaron-official.com/*` と `https://<ユーザー名>.github.io/*`(念のため両方)を許可リストに追加する(これを設定しないと誰でもキーを使えてしまうため必須)
 5. 同じキーの「APIの制限」を **キーを制限** にし、**YouTube Data API v3** のみを許可する。HTTPリファラー制限は `curl -H "Referer: ..."` のようなブラウザ以外のクライアントからは簡単に偽装できるため、リファラー制限だけでは不十分。API制限を併用することで、万が一キーが漏れても同じGoogle Cloudプロジェクト内の他のAPIには使えないようにする
 6. Google Cloud Consoleで使用量/割り当てのアラートを設定しておく(想定外の大量アクセスやキー漏洩に気づけるようにするため)
 7. `script.js` の `YOUTUBE_API_KEY` の値を、発行したキーに書き換える
