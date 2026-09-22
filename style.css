@@ -61,6 +61,33 @@ button { font-family: inherit; color: inherit; }
   margin-left: auto;
 }
 
+.site-nav-icons svg {
+  width: 30px;
+  height: 30px;
+}
+
+@media (max-width: 480px) {
+  .site-nav-icons {
+    gap: 10px;
+  }
+
+  .site-nav-icons svg {
+    width: 20px;
+    height: 20px;
+  }
+}
+
+@media (min-width: 481px) and (max-width: 720px) {
+  .site-nav-icons {
+    gap: 14px;
+  }
+
+  .site-nav-icons svg {
+    width: 24px;
+    height: 24px;
+  }
+}
+
 .site-nav-icons a {
   color: var(--text);
   opacity: 0.85;
