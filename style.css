@@ -249,7 +249,7 @@ button { font-family: inherit; color: inherit; }
 .profile-info-frame {
   position: relative;
   width: min(360px, 100%);
-  aspect-ratio: 5 / 3;
+  min-height: 33vw;
   margin: 32px auto;
 }
 
